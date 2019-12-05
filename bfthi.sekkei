@@ -1,0 +1,49 @@
+
+### gen dic
+# [opcode][token][bodysize]body
+## 23 '#' - raw block
+# no expansion.
+# add epilog implicitly.
+## 3a ':' - subroutine threading
+# token defined by '#' -> expand except epilog.
+# token defined by ':' -> add prolog to call.
+# add epilog implicitly.
+
+typedef struct {
+ int type;
+ size_t size, addr;
+} word;
+
+char *output;
+
+int main(void){
+ while(1){
+  char c=getchar();
+  switch(c){
+   case ':'  :
+   case '#':
+   default:
+    err;
+  }
+ }
+}
+
+---
+
+## hexload.hex
+load a program to memory and boot.
+the program is written in hex.
+## fthb.hex
+header as runtime which compiler can not deal with.
+## fthc.fth
+forth self compiler.
+
+---
+
+/*
+* forth without foreward jump optimization
+compiler has a stack which holds (address,imm-encoding) of jump-source.
+since forword jump never heads toward a named label in forth,
+and context-free grammar is common,
+jump-source stack is enough.
+*/
