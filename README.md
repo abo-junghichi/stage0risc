@@ -8,7 +8,7 @@ https://github.com/oriansj/stage0
 ## 構築済み
 ### 対象マシンのC言語実装
 <pre>
-$ gcc emu-aligin.c -o emu.out
+$ gcc emu-align.c -o emu.out
 </pre>
 ### 16進数表記テキストからバイトコードへの変換のC言語実装
 <pre>
