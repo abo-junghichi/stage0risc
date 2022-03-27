@@ -6,13 +6,20 @@ https://github.com/oriansj/stage0
 そこで、MIPSプロセッサ並に単純な命令セットのRISCマシンでbootstrapを目指す。
 
 ## 構築済み
-### 対象マシンのC言語実装
-<pre>
-$ gcc emu-align.c -o emu.out
-</pre>
 ### 16進数表記テキストからバイトコードへの変換のC言語実装
 <pre>
 $ gcc hex.c -o hex.out
+</pre>
+### 対象マシンのC言語実装
+<pre>
+$ ./hex.out < bootloader.hex > bootloader.img
+$ gcc img2c.c -o img2c.out
+$ ./img2c.out < bootloader.img > rom.c
+$ gcc emu-align.c -o emu.out
+</pre>
+または
+<pre>
+$ make emu.out
 </pre>
 ### 16進数表記でのhello,world!プログラム
 <pre>

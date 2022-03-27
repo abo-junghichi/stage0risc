@@ -8,18 +8,18 @@ a1 0a 00 00 # getc %a
 a1 0b 00 00 # getc %b
 a1 0c 00 00 # getc %c
 a1 0d 00 00 # getc %d
-8d 0b 0b 08 # shll %b %b %8
+8d 0b 0b 08 # shl %b %b %8
 89 0a 0a 0b # or %a %a %b
-8d 0d 0d 08 # shll %d %d %8
+8d 0d 0d 08 # shl %d %d %8
 89 0c 0c 0d # or %c %c %d
 80 fe 10 00 # lit %fe $16
-8d 0c 0c ff # shll %c %c %ff
+8d 0c 0c ff # shl %c %c %ff
 89 0a 0a 0c # or %a %a %c
 81 0d 1c 00 # rel %d @data # @data = 0x1c
 82 ff 14 00 # jal %ff @branch # @branch = 0x14
 # loop:0x40
 a1 0c 00 00 # getc %c
-95 0c 00 0d # sb %c $0 %d
+93 0c 00 0d # sb %c $0 %d
 86 0d 0d 01 # add %d %d %1
 87 0a 0a 01 # sub %a %a %1
 #branch:0x50

@@ -1,13 +1,18 @@
-20 00 00 00  # size
+34 00 00 00  # size
 # :start 0x0
 80 01 01 00  # lit %1 $1
 80 10 10 00  # lit %10 $16
 80 0a ff 00  # lit %a $count
 8d 0a 0a 10  # shll %a %a %10 # %a = $count << 16
-82 ff 08 00 # jal %ff @br = 0x8
-# :crunch 0xc
-87 0a 0a 01  # sub %a %a %1
-# :br 0x10
-85 0a fc ff  # bnez %a @crunch = -0x4 = 0xfffc
+80 0c 00 00  # lit %c $0
+81 0b 1c 00  # rel %b @data = 1c
+95 01 00 0b  # sd %1 $0 %b
+# :crunch
+92 0d 00 0b  # ld %d $0 %b
+86 0c 0c 0d  # add %c %c %d
+8c 0c 0f 0a  # sltu %c %f %a
+85 0f f4 ff  # bnez %f @crunch = -0xc? = 0xfff4
 a0 00 00 00  # system
+# :data
+01 00 00 00  # $1
 $

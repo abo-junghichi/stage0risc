@@ -3,7 +3,7 @@
 #include "rom.c"
 /* Maximum where 16bit relative addressing is enough. */
 #define MEM_SIZE (0x2000)
-static uint32_t pc, reg[256], mem[MEM_SIZE];
+static uint32_t pc, reg[256], mem[MEM_SIZE + 1];
 static int bad_addr(int byte, uint32_t vaddr)
 {
     return (vaddr % byte) || ((vaddr / 4) >= MEM_SIZE);
@@ -51,43 +51,69 @@ static uint8_t get_field(uint32_t inst, int field)
 }
 static int exec_vm(void)
 {
-    while (1) {
-	uint32_t inst = mem[pc / 4];
-	uint32_t npc = pc + 4;
-	if (bad_addr(4, pc))
-	    return 1;
+    int rtn;
+    uint32_t inst;
+    uint32_t *lpc;
+#define RETURN(ret) { rtn = ret; goto end; }
 #define S16 ((int16_t) (inst >> 16))
-#define REL16 (pc + S16)
+#define REL16 ((lpc - mem) * 4 + S16)
 #define FIELD(n) (get_field(inst,n))
+#define GUARD_stringify_core(num) #num
+#define GUARD_stringify(num_macro) GUARD_stringify_core(num_macro)
+#define GUARD __asm__("/* " __FILE__ " " GUARD_stringify(__LINE__) " */")
+#define NEXT_CORE break
+#define NEXT lpc++; NEXT_CORE
+    if (bad_addr(4, pc))
+	return 1;
+    lpc = &mem[pc / 4];
+    mem[MEM_SIZE] = 0 /* sentinel */ ;
+    while (1) {
+	inst = *lpc;
 	switch (FIELD(0)) {
 	case op_lit:
 	    reg[FIELD(1)] = S16;
-	    break;
+	    NEXT;
 	case op_rel:
 	    reg[FIELD(1)] = REL16;
-	    break;
+	    NEXT;
+#define JMP(addr) uint32_t vpc = (addr), *tpc; if (bad_addr(4, vpc)) RETURN(1); tpc = &mem[vpc / 4]
+#define RELJMP JMP(REL16)
 	case op_jal:
-	    reg[FIELD(1)] = npc;
-	    npc = REL16;
-	    break;
+	    {
+		RELJMP;
+		reg[FIELD(1)] = (lpc + 1 - mem) * 4;
+		lpc = tpc;
+	    }
+	    NEXT_CORE;
 	case op_jalr:
-	    reg[FIELD(2)] = npc;
-	    npc = reg[FIELD(1)] + reg[FIELD(3)];
-	    break;
-#define CASE_BRANCH(name,op) case op_##name: if (reg[FIELD(1)] op 0) npc = REL16; break
+	    {
+		JMP(reg[FIELD(1)] + reg[FIELD(3)]);
+		reg[FIELD(2)] = (lpc + 1 - mem) * 4;
+		lpc = tpc;
+	    }
+	    NEXT_CORE;
+#define CASE_BRANCH(name,op) case op_##name: if (reg[FIELD(1)] op 0) goto branch; else goto nop
+	  branch:
+	    {
+		RELJMP;
+		lpc = tpc;
+	    }
+	    NEXT_CORE;
+	  nop:
+	    NEXT;
 	    CASE_BRANCH(beqz, ==);
 	    CASE_BRANCH(bnez, !=);
-#define CASE_ALU(name,op) case op_##name: reg[FIELD(2)] = reg[FIELD(1)] op reg[FIELD(3)]; break
+#define CASE_ALU(name,op) case op_##name: reg[FIELD(2)] = reg[FIELD(1)] op reg[FIELD(3)]; NEXT
 	    CASE_ALU(add, +);
 	    CASE_ALU(sub, -);
 	    CASE_ALU(xor, ^);
 	    CASE_ALU(or, |);
 	    CASE_ALU(and, &);
-#define CASE_SLT(name,cast) case op_##name: reg[FIELD(2)] = -(((cast) reg[FIELD(1)]) < ((cast) reg[FIELD(3)])); break
+#define CASE_SLT(name,cast) case op_##name: reg[FIELD(2)] = -(((cast) reg[FIELD(1)]) < ((cast) reg[FIELD(3)])); NEXT
 	    CASE_SLT(slt, int32_t);
 	    CASE_SLT(sltu, uint32_t);
 #define SHIFT_MASK ((0x1 << 5) - 1)
-#define CASE_SHIFT(name,op) case op_##name: reg[FIELD(2)] = reg[FIELD(1)] op (reg[FIELD(3)] & SHIFT_MASK); break
+#define CASE_SHIFT(name,op) case op_##name: reg[FIELD(2)] = reg[FIELD(1)] op (reg[FIELD(3)] & SHIFT_MASK); NEXT
 	    CASE_SHIFT(shl, <<);
 	    CASE_SHIFT(shrl, >>);
 	case op_shra:
@@ -98,49 +124,52 @@ static int exec_vm(void)
 		    ((reg[FIELD(1)] ^ sign_bit) >> shift) -
 		    (sign_bit >> shift);
 	    }
-	    break;
-#define CASE_LOAD(name,byte,cast) case op_##name: { uint32_t tmp; if (loadmem(byte, reg[FIELD(3)] + FIELD(2), &tmp)) return 1; reg[FIELD(1)] = ((cast) tmp); } break
+	    NEXT;
+#define CASE_LOAD(name,byte,cast) case op_##name: { uint32_t tmp; if (loadmem(byte, reg[FIELD(3)] + FIELD(2), &tmp)) RETURN(1); reg[FIELD(1)] = ((cast) tmp); } NEXT
 	    CASE_LOAD(lb, 1, int8_t);
 	    CASE_LOAD(lw, 2, int16_t);
 	    CASE_LOAD(ld, 4, int32_t);
-#define CASE_STORE(name,byte) case op_##name: if (storemem(byte, reg[FIELD(3)] + FIELD(2), reg[FIELD(1)])) return 1; break;
+#define CASE_STORE(name,byte) case op_##name: if (storemem(byte, reg[FIELD(3)] + FIELD(2), reg[FIELD(1)])) RETURN(1); NEXT
 	    CASE_STORE(sb, 1);
 	    CASE_STORE(sw, 2);
 	case op_sd:
 	    {
 		uint32_t vaddr = reg[FIELD(3)] + FIELD(2);
 		if (bad_addr(4, vaddr))
-		    return 1;
+		    RETURN(1);
 		mem[vaddr / 4] = reg[FIELD(1)];
 	    }
-	    break;
+	    NEXT;
 	case op_system:
 	    if (0 != FIELD(1) || 0 != S16)
-		return 1;
-	    return 0;
+		RETURN(1);
+	    RETURN(0);
 	case op_getc:
 	    if (0 != S16)
-		return 1;
+		RETURN(1);
 	    {
 		int rst = fgetc(stdin);
 		if (EOF == rst)
 		    rst = -1;
 		reg[FIELD(1)] = rst;
 	    }
-	    break;
+	    NEXT;
 	case op_putc:
 	    if (0 != S16)
-		return 1;
+		RETURN(1);
 	    if (EOF == fputc(reg[FIELD(1)], stdout))
-		return 1;
-	    break;
+		RETURN(1);
+	    NEXT;
 	case 0x00:
 	case 0xff:
 	default:
-	    return 1;
+	    /* sentinel */
+	    RETURN(1);
 	}
-	pc = npc;
     }
+  end:
+    pc = (lpc - mem) * 4;
+    return rtn;
 }
 static void init(void)
 {
