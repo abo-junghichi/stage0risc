@@ -45,10 +45,6 @@ typedef enum {
 	   op_nopw = 0x20, op_getc_w, op_putc_w */
 	/* 1 byte instructions 00XX-XXXX (!=0) op_nop */
 } op_code;
-static uint8_t get_field(uint32_t inst, int field)
-{
-    return (inst >> (8 * field)) & 0xff;
-}
 static int exec_vm(void)
 {
     while (1) {
@@ -58,7 +54,7 @@ static int exec_vm(void)
 	    return 1;
 #define S16 ((int16_t) (inst >> 16))
 #define REL16 (pc + S16)
-#define FIELD(n) (get_field(inst,n))
+#define FIELD(field) ((inst >> (8 * field)) & 0xff)
 	switch (FIELD(0)) {
 	case op_lit:
 	    reg[FIELD(1)] = S16;

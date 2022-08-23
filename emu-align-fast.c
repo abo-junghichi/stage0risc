@@ -45,10 +45,6 @@ typedef enum {
 	   op_nopw = 0x20, op_getc_w, op_putc_w */
 	/* 1 byte instructions 00XX-XXXX (!=0) op_nop */
 } op_code;
-static uint8_t get_field(uint32_t inst, int field)
-{
-    return (inst >> (8 * field)) & 0xff;
-}
 static int exec_vm(void)
 {
     int rtn;
@@ -57,7 +53,7 @@ static int exec_vm(void)
 #define RETURN(ret) { rtn = ret; goto end; }
 #define S16 ((int16_t) (inst >> 16))
 #define REL16 ((lpc - mem) * 4 + S16)
-#define FIELD(n) (get_field(inst,n))
+#define FIELD(field) ((inst >> (8 * field)) & 0xff)
 #define GUARD_stringify_core(num) #num
 #define GUARD_stringify(num_macro) GUARD_stringify_core(num_macro)
 #define GUARD __asm__("/* " __FILE__ " " GUARD_stringify(__LINE__) " */")
