@@ -16,3 +16,7 @@ emu.out: emu-align.c rom.c
 	$(CC) -pedantic emu-align.c -o emu.out
 emu-fast.out: emu-align-fast.c rom.c
 	$(CC) -pedantic emu-align-fast.c -o emu-fast.out
+emu-gnu.out: emu-align-gnu.c rom.c
+	$(CC) emu-align-gnu.c -o emu-gnu.out
+emu-risc.out: emu-align-gnu-risc.c rom.c
+	$(CC) emu-align-gnu-risc.c -o emu-risc.out
