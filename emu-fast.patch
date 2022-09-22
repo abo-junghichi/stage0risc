@@ -1,0 +1,93 @@
+--- emu-align-gnu.c	2022-09-23 00:51:46.442189071 +0900
++++ emu-align-fast.c	2022-09-23 00:24:31.405330956 +0900
+@@ -47,53 +47,23 @@
+ } op_code;
+ static int exec_vm(void)
+ {
+-    int rtn, i;
++    int rtn;
+     uint32_t inst;
+     uint32_t *lpc;
+-    void *label[256];
+ #define RETURN(ret) { rtn = ret; goto end; }
+ #define S16 ((int16_t) (inst >> 16))
+ #define REL16 ((lpc - mem) * 4 + S16)
+ #define FIELD(field) ((inst >> (8 * field)) & 0xff)
+-#define GUARD_stringify_core(num) #num
+-#define GUARD_stringify(num_macro) GUARD_stringify_core(num_macro)
+-#define GUARD __asm__("/* " __FILE__ " " GUARD_stringify(__LINE__) " */")
+-#define NEXT_CORE inst = *lpc; GUARD; goto *label[FIELD(0)]
++#define NEXT_CORE inst = *lpc; break
+ #define NEXT lpc++; NEXT_CORE
+     if (bad_addr(4, pc))
+ 	return 1;
+-    for (i = 0; i < 256; i++)
+-	label[i] = &&sentinel;
+-#define LABEL(name) label[op_##name] = && l_##name
+-    LABEL(lit);
+-    LABEL(rel);
+-    LABEL(jal);
+-    LABEL(jalr);
+-    LABEL(beqz);
+-    LABEL(bnez);
+-    LABEL(add);
+-    LABEL(sub);
+-    LABEL(xor);
+-    LABEL(or);
+-    LABEL(and);
+-    LABEL(slt);
+-    LABEL(sltu);
+-    LABEL(shl);
+-    LABEL(shrl);
+-    LABEL(shra);
+-    LABEL(lb);
+-    LABEL(lw);
+-    LABEL(ld);
+-    LABEL(sb);
+-    LABEL(sw);
+-    LABEL(sd);
+-    LABEL(system);
+-    LABEL(getc);
+-    LABEL(putc);
+     lpc = &mem[pc / 4];
+     mem[MEM_SIZE] = 0 /* sentinel */ ;
+-    NEXT_CORE;
+-#define CASE(name) l_##name
++#define LOOP_BEGIN while(1) { inst = *lpc; switch (FIELD(0)) { while(0)
++#define LOOP_END } } while(0)
++    LOOP_BEGIN;
++#define CASE(name) case op_##name
+   CASE(lit):
+     reg[FIELD(1)] = S16;
+     NEXT;
+@@ -140,9 +110,14 @@
+ #define CASE_SHIFT(name,cast,op) CASE(name): reg[FIELD(2)] = ((cast) reg[FIELD(1)]) op (reg[FIELD(3)] & SHIFT_MASK); NEXT
+     CASE_SHIFT(shl, uint32_t, <<);
+     CASE_SHIFT(shrl, uint32_t, >>);
+-    /* gcc treats shift-right on signed with sign extension.
+-     * See [ info gcc -> C Implementation -> Integers implementation ]. */
+-    CASE_SHIFT(shra, int32_t, >>);
++  CASE(shra):
++    {
++	uint32_t sign_bit = ((uint32_t) 0x1) << 31, shift =
++	    reg[FIELD(3)] & SHIFT_MASK;
++	reg[FIELD(2)] =
++	    ((reg[FIELD(1)] ^ sign_bit) >> shift) - (sign_bit >> shift);
++    }
++    NEXT;
+ #define CASE_LOAD(name,byte,cast) CASE(name): { uint32_t tmp; if (loadmem(byte, reg[FIELD(3)] + FIELD(2), &tmp)) RETURN(1); reg[FIELD(1)] = ((cast) tmp); } NEXT
+     CASE_LOAD(lb, 1, int8_t);
+     CASE_LOAD(lw, 2, int16_t);
+@@ -179,8 +154,11 @@
+ 	RETURN(1);
+     NEXT;
+     /* case 0x00: case 0xff: default: */
+-  sentinel:
++case 0x00:
++case 0xff:
++default:
+     RETURN(1);
++    LOOP_END;
+   end:
+     pc = (lpc - mem) * 4;
+     return rtn;

@@ -1,0 +1,63 @@
+--- emu-align-gnu.c	2022-09-23 00:24:31.405330956 +0900
++++ emu-align-gnu-sisc.c	2022-09-23 00:24:31.395331156 +0900
+@@ -49,16 +49,16 @@
+ {
+     int rtn, i;
+     uint32_t inst;
+-    uint32_t *lpc;
++    uint32_t lpc;
+     void *label[256];
+ #define RETURN(ret) { rtn = ret; goto end; }
+ #define S16 ((int16_t) (inst >> 16))
+-#define REL16 ((lpc - mem) * 4 + S16)
++#define REL16 (lpc * 4 + S16)
+ #define FIELD(field) ((inst >> (8 * field)) & 0xff)
+ #define GUARD_stringify_core(num) #num
+ #define GUARD_stringify(num_macro) GUARD_stringify_core(num_macro)
+ #define GUARD __asm__("/* " __FILE__ " " GUARD_stringify(__LINE__) " */")
+-#define NEXT_CORE inst = *lpc; GUARD; goto *label[FIELD(0)]
++#define NEXT_CORE inst = mem[lpc]; GUARD; goto *label[FIELD(0)]
+ #define NEXT lpc++; NEXT_CORE
+     if (bad_addr(4, pc))
+ 	return 1;
+@@ -90,7 +90,7 @@
+     LABEL(system);
+     LABEL(getc);
+     LABEL(putc);
+-    lpc = &mem[pc / 4];
++    lpc = pc / 4;
+     mem[MEM_SIZE] = 0 /* sentinel */ ;
+     NEXT_CORE;
+ #define CASE(name) l_##name
+@@ -100,19 +100,19 @@
+   CASE(rel):
+     reg[FIELD(1)] = REL16;
+     NEXT;
+-#define JMP(addr) uint32_t vpc = (addr), *tpc; if (bad_addr(4, vpc)) RETURN(1); tpc = &mem[vpc / 4]
++#define JMP(addr) uint32_t tpc = (addr); if (bad_addr(4, tpc)) RETURN(1); tpc /= 4
+ #define RELJMP JMP(REL16)
+   CASE(jal):
+     {
+ 	RELJMP;
+-	reg[FIELD(1)] = (lpc + 1 - mem) * 4;
++	reg[FIELD(1)] = (lpc + 1) * 4;
+ 	lpc = tpc;
+     }
+     NEXT_CORE;
+   CASE(jalr):
+     {
+ 	JMP(reg[FIELD(1)] + reg[FIELD(3)]);
+-	reg[FIELD(2)] = (lpc + 1 - mem) * 4;
++	reg[FIELD(2)] = (lpc + 1) * 4;
+ 	lpc = tpc;
+     }
+     NEXT_CORE;
+@@ -182,7 +182,7 @@
+   sentinel:
+     RETURN(1);
+   end:
+-    pc = (lpc - mem) * 4;
++    pc = lpc * 4;
+     return rtn;
+ }
+ static void init(void)
