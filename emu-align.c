@@ -98,7 +98,14 @@ static int exec_vm(void)
 #define CASE_LOAD(name,byte,cast) case op_##name: { uint32_t tmp; if (loadmem(byte, reg[FIELD(3)] + FIELD(2), &tmp)) return 1; reg[FIELD(1)] = ((cast) tmp); } break
 	    CASE_LOAD(lb, 1, int8_t);
 	    CASE_LOAD(lw, 2, int16_t);
-	    CASE_LOAD(ld, 4, int32_t);
+	case op_ld:
+	    {
+		uint32_t vaddr = reg[FIELD(3)] + FIELD(2);
+		if (bad_addr(4, vaddr))
+		    return 1;
+		reg[FIELD(1)] = mem[vaddr / 4];
+	    }
+	    break;
 #define CASE_STORE(name,byte) case op_##name: if (storemem(byte, reg[FIELD(3)] + FIELD(2), reg[FIELD(1)])) return 1; break;
 	    CASE_STORE(sb, 1);
 	    CASE_STORE(sw, 2);

@@ -1,5 +1,5 @@
---- emu-align-gnu.c	2022-09-23 00:51:46.442189071 +0900
-+++ emu-align-fast.c	2022-09-23 00:24:31.405330956 +0900
+--- emu-align-gnu.c	2022-09-23 02:54:05.176782890 +0900
++++ emu-align-fast.c	2022-09-23 02:58:16.471247289 +0900
 @@ -47,53 +47,23 @@
  } op_code;
  static int exec_vm(void)
@@ -78,7 +78,7 @@
  #define CASE_LOAD(name,byte,cast) CASE(name): { uint32_t tmp; if (loadmem(byte, reg[FIELD(3)] + FIELD(2), &tmp)) RETURN(1); reg[FIELD(1)] = ((cast) tmp); } NEXT
      CASE_LOAD(lb, 1, int8_t);
      CASE_LOAD(lw, 2, int16_t);
-@@ -179,8 +154,11 @@
+@@ -186,8 +161,11 @@
  	RETURN(1);
      NEXT;
      /* case 0x00: case 0xff: default: */
