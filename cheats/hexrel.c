@@ -14,21 +14,9 @@ static int dehex_part(int base, int floor, int ceiling, char hex, int *rst)
 static int dehex(char hex, int *rst)
 {
     return dehex_part('0', 0, 10, hex, rst)
-	// || dehex_part('a', 10, 16, hex, rst)
 	|| dehex_part('A', 10, 16, hex, rst);
+    // || dehex_part('A', 10, 16, hex & ~0x20, rst);
 }
-typedef union {
-    size_t size;
-    char image[1];
-} cell;
-#define MEM_SIZE (100000)
-static cell mem[MEM_SIZE];
-enum { block_bytes, block_label, block_forward, block_backward,
-    block_end
-};
-typedef struct {
-    size_t type, prev, bytes, next;
-} block_header;
 static int get_key(int *peek)
 {
     *peek = fgetc(stdin);
@@ -43,6 +31,18 @@ static int get_key(int *peek)
 	return 0;
     }
 }
+typedef union {
+    size_t size;
+    char image[1];
+} cell;
+#define MEM_SIZE (100000)
+static cell mem[MEM_SIZE];
+enum { block_bytes, block_label, block_forward, block_backward,
+    block_end
+};
+typedef struct {
+    size_t type, prev, bytes, next;
+} block_header;
 typedef struct {
     size_t prev, pos;
     char *image;
@@ -99,12 +99,11 @@ static int parse_src(void)
 	switch (peek) {
 	case '#':
 	    while (1) {
-		switch (peek) {
+		switch (fgetc(stdin)) {
 		case EOF:
 		case '\n':
 		    goto comment_done;
 		}
-		peek = fgetc(stdin);
 	    }
 	  comment_done:
 	    continue;
