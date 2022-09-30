@@ -2,8 +2,7 @@
 # hex
 # comments begin with '#', end with '\n'.
 3a 23   # '\s' is ignored.
-# '\n' is also ignored.
-3a23 # same bytes as above.
+# '\n' and '\t' are also ignored.
 # each byte must be two nibble sequense.
 # so, below example is invalid.
 3 a23
@@ -12,53 +11,62 @@
 # so, this line and below is dealed with by what loaded.
 */
 #include <stdio.h>
-static int hex(int c, int *rst)
+static int dehex_part(int base, int floor, int ceiling, char hex, int *rst)
 {
-    if (c >= '0' && c <= '9') {
-	*rst = c - '0';
-	return 1;
-    } else if (c >= 'a' && c <= 'f') {
-	*rst = c - 'a' + 10;
-	return 1;
+    if (base > hex)
+	return 0;
+    hex += floor - base;
+    if (ceiling <= hex)
+	return 0;
+    *rst = hex;
+    return 1;
+}
+static int dehex(char hex, int *rst)
+{
+    return dehex_part('0', 0, 10, hex, rst)
+	|| dehex_part('A', 10, 16, hex & ~0x20, rst);
+}
+static int get_key(int *peek)
+{
+    *peek = getchar();
+    switch (*peek) {
+    case ' ':
+    case '\n':
+    case '\t':
+	return ' ';
+    default:
+	return *peek;
     }
-    return 0;
 }
 int main(void)
 {
-    while (!0) {
-	int upper, lower, c = getchar();
-	if (hex(c, &upper)) {
-	    c = getchar();
-	    if (hex(c, &lower)) {
-		putchar((upper << 4) + lower);
-		continue;
-	    } else
-		return 1;
-	}
-	switch (c) {
-	case '#':
-	    while (!0) {
-		c = getchar();
-		if ('\n' == c)
-		    break;
-		else if (EOF == c)
-		    return 1;
-	    }
-	    break;
+    while (1) {
+	int upper, lower, peek;
+	switch (get_key(&peek)) {
 	case ' ':
-	case '\n':
+	    break;
+	case '#':
+	    while (1)
+		switch (getchar()) {
+		case '\n':
+		    goto comment_done;
+		case EOF:
+		    return 1;
+		}
+	  comment_done:
 	    break;
 	case '$':
-	    {
-		c = getchar();
-		if ('\n' == c)
-		    return 0;
-		else
-		    return 1;
-	    }
+	    if ('\n' == getchar())
+		return 0;
+	    else
+		return 1;
 	default:
+	    if (dehex(peek, &upper) && dehex(getchar(), &lower)
+		&& ' ' == get_key(&peek)) {
+		putchar((upper << 4) + lower);
+		break;
+	    }
 	    return 1;
 	}
     }
-    return 1;
 }
