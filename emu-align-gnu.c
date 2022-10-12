@@ -100,7 +100,7 @@ static int exec_vm(void)
   CASE(rel):
     reg[FIELD(1)] = REL16;
     NEXT;
-#define JMP(addr) uint32_t vpc = (addr), *tpc; if (bad_addr(4, vpc)) RETURN(1); tpc = &mem[vpc / 4]
+#define JMP(addr) uint32_t vpc = (addr), *tpc; if (bad_addr(4, vpc)) RETURN(1); tpc = (uint32_t *) ((char *) mem + vpc)
 #define RELJMP JMP(REL16)
   CASE(jal):
     {
