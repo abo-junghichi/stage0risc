@@ -1,19 +1,20 @@
 # bootloader in the rom.
 50 00 00 00 # program size
 # start:0x00
-# read 4 byte header
+# constants
 80 01 01 00 # lit %1 $1
-80 08 08 00 # lit %8 $8
+80 fd 08 00 # lit %fd $8
+80 fe 10 00 # lit %fe $16
+# read 4 byte header
 a1 0a 00 00 # getc %a
 a1 0b 00 00 # getc %b
 a1 0c 00 00 # getc %c
 a1 0d 00 00 # getc %d
-8d 0b 0b 08 # shl %b %b %8
+8d 0b 0b fd # shl %b %b $8
 89 0a 0a 0b # or %a %a %b
-8d 0d 0d 08 # shl %d %d %8
+8d 0d 0d fd # shl %d %d $8
 89 0c 0c 0d # or %c %c %d
-80 fe 10 00 # lit %fe $16
-8d 0c 0c ff # shl %c %c %ff
+8d 0c 0c fe # shl %c %c $16
 89 0a 0a 0c # or %a %a %c
 81 0d 1c 00 # rel %d @data # @data = 0x1c
 82 ff 14 00 # jal %ff @branch # @branch = 0x14
