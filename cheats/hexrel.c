@@ -14,8 +14,8 @@ static int dehex_part(int base, int floor, int ceiling, char hex, int *rst)
 static int dehex(char hex, int *rst)
 {
     return dehex_part('0', 0, 10, hex, rst)
-	|| dehex_part('A', 10, 16, hex, rst);
-    // || dehex_part('A', 10, 16, hex & ~0x20, rst);
+	|| dehex_part('A', 10, 16, hex, rst)
+	|| dehex_part('A', 10, 16, hex & ~0x20, rst);
 }
 static int get_key(int *peek)
 {
