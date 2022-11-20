@@ -13,7 +13,7 @@ int main(void)
     /* skip img-header. */
     for (cf = 0; cf < 4; cf++)
 	fgetc(stdin);
-    printf("uint8_t rom[] = {\n");
+    printf("static uint8_t rom[] = {\n");
     cf = convbyte("");
     while (cf)
 	cf = convbyte(", ");
