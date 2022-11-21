@@ -40,7 +40,7 @@ int main(void)
     LABEL_START(0xa0, system);
     LABEL(getc);
     LABEL(putc);
-    head = "const void *label[256] = {\n ";
+    head = "static const void *label[256] = {\n ";
     for (i = 0; i < 256; i++) {
 	printf("%s/*%02x*/&&%s\n", head, i, op_name[i]);
 	head = ",";

@@ -1,265 +1,5 @@
 	.file	"emu-align-asm.c"
 	.text
-	.data
-	.align 32
-.LC1:
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L2
-	.long	.L3
-	.long	.L4
-	.long	.L5
-	.long	.L6
-	.long	.L7
-	.long	.L8
-	.long	.L9
-	.long	.L10
-	.long	.L11
-	.long	.L12
-	.long	.L13
-	.long	.L14
-	.long	.L15
-	.long	.L16
-	.long	.L17
-	.long	.L18
-	.long	.L19
-	.long	.L20
-	.long	.L21
-	.long	.L22
-	.long	.L23
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L24
-	.long	.L25
-	.long	.L26
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.long	.L1
-	.text
 	.p2align 4
 	.type	exec_vm, @function
 exec_vm:
@@ -268,7 +8,6 @@ exec_vm:
 	pushl	%ebp
 	.cfi_def_cfa_offset 8
 	.cfi_offset 5, -8
-	movl	$256, %ecx
 	pushl	%edi
 	.cfi_def_cfa_offset 12
 	.cfi_offset 7, -12
@@ -280,26 +19,17 @@ exec_vm:
 	.cfi_offset 3, -20
 	call	__x86.get_pc_thunk.bx
 	addl	$_GLOBAL_OFFSET_TABLE_, %ebx
-	subl	$1068, %esp
-	.cfi_def_cfa_offset 1088
-	movl	%gs:20, %eax
-	movl	%eax, 1052(%esp)
-	xorl	%eax, %eax
-	leal	28(%esp), %edi
-	leal	.LC1@GOTOFF(%ebx), %esi
-	rep movsl
+	subl	$28, %esp
+	.cfi_def_cfa_offset 48
 	movl	pc@GOTOFF(%ebx), %esi
 	testl	$3, %esi
-	jne	.L39
+	jne	.L38
 	cmpl	$32767, %esi
-	jbe	.L71
-.L39:
+	jbe	.L70
+.L38:
 	movl	$1, %eax
-.L27:
-	movl	1052(%esp), %edx
-	subl	%gs:20, %edx
-	jne	.L72
-	addl	$1068, %esp
+.L1:
+	addl	$28, %esp
 	.cfi_remember_state
 	.cfi_def_cfa_offset 20
 	popl	%ebx
@@ -315,7 +45,7 @@ exec_vm:
 	.cfi_restore 5
 	.cfi_def_cfa_offset 4
 	ret
-.L71:
+.L70:
 	.cfi_restore_state
 	movl	%esi, %eax
 	leal	mem@GOTOFF(%ebx), %edi
@@ -329,16 +59,16 @@ exec_vm:
 	movl	stdin@GOT(%ebx), %eax
 	movl	%eax, 12(%esp)
 	movzbl	%cl, %eax
-	jmp	*28(%esp,%eax,4)
-.L1:
+	jmp	*label.0@GOTOFF(%ebx,%eax,4)
+.L37:
 	movl	$1, %eax
-.L34:
+.L11:
 	subl	%edi, %esi
 	movl	%esi, pc@GOTOFF(%ebx)
-	jmp	.L27
-.L2:
+	jmp	.L1
+.L5:
 #APP
-# 62 "emu-align-asm.c" 1
+# 63 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	sarl $16, %ecx
 # 0 "" 2
@@ -346,80 +76,80 @@ exec_vm:
 	addl	$4, %esi
 	movl	%ecx, regfile@GOTOFF(%ebx,%eax,4)
 #APP
-# 64 "emu-align-asm.c" 1
+# 65 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*64*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*65*/
 # 0 "" 2
 #NO_APP
-.L31:
-.L29:
+.L7:
+.L3:
 	movzbl	%cl, %eax
-	jmp	*28(%esp,%eax,4)
-.L26:
+	jmp	*label.0@GOTOFF(%ebx,%eax,4)
+.L36:
 #APP
-# 156 "emu-align-asm.c" 1
+# 157 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	sarl $16, %ecx
 # 0 "" 2
 #NO_APP
 	testl	%ecx, %ecx
-	jne	.L1
+	jne	.L37
 	pushl	%edx
-	.cfi_def_cfa_offset 1092
+	.cfi_def_cfa_offset 52
 	pushl	%edx
-	.cfi_def_cfa_offset 1096
+	.cfi_def_cfa_offset 56
 	movl	16(%esp), %edx
 	pushl	(%edx)
-	.cfi_def_cfa_offset 1100
+	.cfi_def_cfa_offset 60
 	pushl	regfile@GOTOFF(%ebx,%eax,4)
-	.cfi_def_cfa_offset 1104
+	.cfi_def_cfa_offset 64
 	call	fputc@PLT
 	addl	$16, %esp
-	.cfi_def_cfa_offset 1088
+	.cfi_def_cfa_offset 48
 	movl	%eax, %edx
 	addl	$1, %edx
-	je	.L1
+	je	.L37
 	leal	4(%esi), %esi
 #APP
-# 161 "emu-align-asm.c" 1
+# 162 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*161*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*162*/
 # 0 "" 2
 #NO_APP
-.L25:
+.L35:
 #APP
-# 145 "emu-align-asm.c" 1
+# 146 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	sarl $16, %ecx
 # 0 "" 2
 #NO_APP
 	testl	%ecx, %ecx
-	jne	.L1
+	jne	.L37
 	subl	$12, %esp
-	.cfi_def_cfa_offset 1100
+	.cfi_def_cfa_offset 60
 	addl	$4, %esi
 	movl	24(%esp), %eax
 	pushl	(%eax)
-	.cfi_def_cfa_offset 1104
+	.cfi_def_cfa_offset 64
 	call	fgetc@PLT
 	addl	$16, %esp
-	.cfi_def_cfa_offset 1088
+	.cfi_def_cfa_offset 48
 	movl	%eax, regfile@GOTOFF(%ebx,%ebp,4)
 #APP
-# 154 "emu-align-asm.c" 1
+# 155 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*154*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*155*/
 # 0 "" 2
 #NO_APP
-.L24:
+.L34:
 #APP
-# 140 "emu-align-asm.c" 1
+# 141 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	sarl $16, %ecx
 # 0 "" 2
@@ -427,10 +157,10 @@ exec_vm:
 	orl	%eax, %ecx
 	setne	%al
 	movzbl	%al, %eax
-	jmp	.L34
-.L23:
+	jmp	.L11
+.L33:
 #APP
-# 131 "emu-align-asm.c" 1
+# 132 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	shrl $16, %ecx
 	movzbl %ch, %edx
@@ -439,24 +169,24 @@ exec_vm:
 #NO_APP
 	addl	regfile@GOTOFF(%ebx,%edx,4), %eax
 	testb	$3, %al
-	jne	.L1
+	jne	.L37
 	cmpl	$32767, %eax
-	ja	.L1
+	ja	.L37
 	movl	regfile@GOTOFF(%ebx,%ebp,4), %edx
 	shrl	$2, %eax
 	addl	$4, %esi
 	movl	%edx, (%edi,%eax,4)
 #APP
-# 138 "emu-align-asm.c" 1
+# 139 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*138*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*139*/
 # 0 "" 2
 #NO_APP
-.L22:
+.L32:
 #APP
-# 129 "emu-align-asm.c" 1
+# 130 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	shrl $16, %ecx
 	movzbl %ch, %edx
@@ -466,9 +196,9 @@ exec_vm:
 	addl	regfile@GOTOFF(%ebx,%edx,4), %eax
 	movl	regfile@GOTOFF(%ebx,%ebp,4), %ebp
 	cmpl	$32767, %eax
-	ja	.L1
+	ja	.L37
 	testb	$1, %al
-	jne	.L1
+	jne	.L37
 	movl	%eax, %edx
 	andl	$3, %eax
 	movzwl	%bp, %ebp
@@ -483,16 +213,16 @@ exec_vm:
 	orl	%ebp, %eax
 	movl	%eax, (%edi,%edx,4)
 #APP
-# 129 "emu-align-asm.c" 1
+# 130 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*129*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*130*/
 # 0 "" 2
 #NO_APP
-.L21:
+.L31:
 #APP
-# 128 "emu-align-asm.c" 1
+# 129 "emu-align-asm.c" 1
 	movzbl %ch, %edx
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -502,7 +232,7 @@ exec_vm:
 	addl	regfile@GOTOFF(%ebx,%ebp,4), %eax
 	movl	regfile@GOTOFF(%ebx,%edx,4), %edx
 	cmpl	$32767, %eax
-	ja	.L1
+	ja	.L37
 	movl	%eax, %ebp
 	andl	$3, %eax
 	movzbl	%dl, %edx
@@ -517,16 +247,16 @@ exec_vm:
 	orl	%edx, %eax
 	movl	%eax, (%edi,%ebp,4)
 #APP
-# 128 "emu-align-asm.c" 1
+# 129 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*128*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*129*/
 # 0 "" 2
 #NO_APP
-.L20:
+.L30:
 #APP
-# 119 "emu-align-asm.c" 1
+# 120 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	shrl $16, %ecx
 	movzbl %ch, %edx
@@ -535,24 +265,24 @@ exec_vm:
 #NO_APP
 	addl	regfile@GOTOFF(%ebx,%edx,4), %eax
 	testb	$3, %al
-	jne	.L1
+	jne	.L37
 	cmpl	$32767, %eax
-	ja	.L1
+	ja	.L37
 	shrl	$2, %eax
 	addl	$4, %esi
 	movl	(%edi,%eax,4), %eax
 	movl	%eax, regfile@GOTOFF(%ebx,%ebp,4)
 #APP
-# 126 "emu-align-asm.c" 1
+# 127 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*126*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*127*/
 # 0 "" 2
 #NO_APP
-.L19:
+.L29:
 #APP
-# 117 "emu-align-asm.c" 1
+# 118 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %edx
@@ -561,9 +291,9 @@ exec_vm:
 #NO_APP
 	addl	regfile@GOTOFF(%ebx,%edx,4), %ecx
 	cmpl	$32767, %ecx
-	ja	.L1
+	ja	.L37
 	testb	$1, %cl
-	jne	.L1
+	jne	.L37
 	movl	%ecx, %edx
 	andl	$3, %ecx
 	addl	$4, %esi
@@ -574,16 +304,16 @@ exec_vm:
 	movswl	%dx, %edx
 	movl	%edx, regfile@GOTOFF(%ebx,%eax,4)
 #APP
-# 117 "emu-align-asm.c" 1
+# 118 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*117*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*118*/
 # 0 "" 2
 #NO_APP
-.L18:
+.L28:
 #APP
-# 116 "emu-align-asm.c" 1
+# 117 "emu-align-asm.c" 1
 	movzbl %ch, %edx
 	shrl $16, %ecx
 	movzbl %ch, %eax
@@ -592,7 +322,7 @@ exec_vm:
 #NO_APP
 	addl	regfile@GOTOFF(%ebx,%eax,4), %ecx
 	cmpl	$32767, %ecx
-	ja	.L1
+	ja	.L37
 	movl	%ecx, %eax
 	andl	$3, %ecx
 	addl	$4, %esi
@@ -603,16 +333,16 @@ exec_vm:
 	movsbl	%al, %eax
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 116 "emu-align-asm.c" 1
+# 117 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*116*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*117*/
 # 0 "" 2
 #NO_APP
-.L17:
+.L27:
 #APP
-# 114 "emu-align-asm.c" 1
+# 115 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -625,16 +355,16 @@ exec_vm:
 	sarl	%cl, %eax
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 114 "emu-align-asm.c" 1
+# 115 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*114*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*115*/
 # 0 "" 2
 #NO_APP
-.L16:
+.L26:
 #APP
-# 111 "emu-align-asm.c" 1
+# 112 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -647,16 +377,16 @@ exec_vm:
 	shrl	%cl, %eax
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 111 "emu-align-asm.c" 1
+# 112 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*111*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*112*/
 # 0 "" 2
 #NO_APP
-.L15:
+.L25:
 #APP
-# 110 "emu-align-asm.c" 1
+# 111 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -669,16 +399,16 @@ exec_vm:
 	sall	%cl, %eax
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 110 "emu-align-asm.c" 1
+# 111 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*110*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*111*/
 # 0 "" 2
 #NO_APP
-.L14:
+.L24:
 #APP
-# 107 "emu-align-asm.c" 1
+# 108 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	shrl $16, %ecx
 	movzbl %ch, %edx
@@ -691,16 +421,16 @@ exec_vm:
 	addl	$4, %esi
 	movl	%edx, regfile@GOTOFF(%ebx,%eax,4)
 #APP
-# 107 "emu-align-asm.c" 1
+# 108 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*107*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*108*/
 # 0 "" 2
 #NO_APP
-.L13:
+.L23:
 #APP
-# 106 "emu-align-asm.c" 1
+# 107 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	shrl $16, %ecx
 	movzbl %ch, %edx
@@ -715,16 +445,16 @@ exec_vm:
 	negl	%edx
 	movl	%edx, regfile@GOTOFF(%ebx,%eax,4)
 #APP
-# 106 "emu-align-asm.c" 1
+# 107 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*106*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*107*/
 # 0 "" 2
 #NO_APP
-.L12:
+.L22:
 #APP
-# 104 "emu-align-asm.c" 1
+# 105 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -736,16 +466,16 @@ exec_vm:
 	addl	$4, %esi
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 104 "emu-align-asm.c" 1
+# 105 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*104*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*105*/
 # 0 "" 2
 #NO_APP
-.L10:
+.L20:
 #APP
-# 102 "emu-align-asm.c" 1
+# 103 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -757,16 +487,16 @@ exec_vm:
 	addl	$4, %esi
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 102 "emu-align-asm.c" 1
+# 103 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*102*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*103*/
 # 0 "" 2
 #NO_APP
-.L9:
+.L19:
 #APP
-# 101 "emu-align-asm.c" 1
+# 102 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -778,16 +508,16 @@ exec_vm:
 	addl	$4, %esi
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 101 "emu-align-asm.c" 1
+# 102 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*101*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*102*/
 # 0 "" 2
 #NO_APP
-.L8:
+.L18:
 #APP
-# 100 "emu-align-asm.c" 1
+# 101 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	shrl $16, %ecx
 	movzbl %ch, %eax
@@ -799,64 +529,64 @@ exec_vm:
 	addl	$4, %esi
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 100 "emu-align-asm.c" 1
+# 101 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*100*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*101*/
 # 0 "" 2
 #NO_APP
-.L7:
+.L17:
+#APP
+# 99 "emu-align-asm.c" 1
+	movzbl %ch, %eax
+# 0 "" 2
+#NO_APP
+	cmpl	$0, regfile@GOTOFF(%ebx,%eax,4)
+	je	.L15
+.L14:
+	movl	%esi, %eax
+	subl	%edi, %eax
+#APP
+# 90 "emu-align-asm.c" 1
+	sarl $16, %ecx
+# 0 "" 2
+#NO_APP
+	addl	%ecx, %eax
+	testb	$3, %al
+	jne	.L37
+	cmpl	$32767, %eax
+	ja	.L37
+	leal	(%edi,%eax), %esi
+#APP
+# 95 "emu-align-asm.c" 1
+	movl (%esi), %ecx
+	movzbl %cl, %eax
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*95*/
+# 0 "" 2
+#NO_APP
+.L16:
 #APP
 # 98 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 # 0 "" 2
 #NO_APP
 	cmpl	$0, regfile@GOTOFF(%ebx,%eax,4)
-	je	.L37
-.L36:
-	movl	%esi, %eax
-	subl	%edi, %eax
-#APP
-# 89 "emu-align-asm.c" 1
-	sarl $16, %ecx
-# 0 "" 2
-#NO_APP
-	addl	%ecx, %eax
-	testb	$3, %al
-	jne	.L1
-	cmpl	$32767, %eax
-	ja	.L1
-	leal	(%edi,%eax), %esi
-#APP
-# 94 "emu-align-asm.c" 1
-	movl (%esi), %ecx
-	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*94*/
-# 0 "" 2
-#NO_APP
-.L6:
-#APP
-# 97 "emu-align-asm.c" 1
-	movzbl %ch, %eax
-# 0 "" 2
-#NO_APP
-	cmpl	$0, regfile@GOTOFF(%ebx,%eax,4)
-	je	.L36
-.L37:
+	je	.L14
+.L15:
 	addl	$4, %esi
 #APP
-# 96 "emu-align-asm.c" 1
+# 97 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*96*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*97*/
 # 0 "" 2
 #NO_APP
-.L5:
+.L12:
 #APP
-# 80 "emu-align-asm.c" 1
+# 81 "emu-align-asm.c" 1
 	movzbl %ch, %edx
 	shrl $16, %ecx
 	movzbl %ch, %eax
@@ -866,51 +596,51 @@ exec_vm:
 	movl	regfile@GOTOFF(%ebx,%eax,4), %eax
 	addl	regfile@GOTOFF(%ebx,%edx,4), %eax
 	testb	$3, %al
-	jne	.L1
+	jne	.L37
 	cmpl	$32767, %eax
-	ja	.L1
+	ja	.L37
 	leal	4(%esi), %edx
 	leal	(%edi,%eax), %esi
 	subl	%edi, %edx
 	movl	%edx, regfile@GOTOFF(%ebx,%ecx,4)
 #APP
-# 86 "emu-align-asm.c" 1
+# 87 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*86*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*87*/
 # 0 "" 2
 #NO_APP
-.L4:
+.L8:
 	movl	%esi, %edx
 	movl	%esi, %eax
 	subl	%edi, %edx
 #APP
-# 72 "emu-align-asm.c" 1
+# 73 "emu-align-asm.c" 1
 	movzbl %ch, %ebp
 	sarl $16, %ecx
 # 0 "" 2
 #NO_APP
 	addl	%ecx, %edx
 	testb	$3, %dl
-	jne	.L1
+	jne	.L37
 	cmpl	$32767, %edx
-	ja	.L1
+	ja	.L37
 	addl	$4, %eax
 	leal	(%edi,%edx), %esi
 	subl	%edi, %eax
 	movl	%eax, regfile@GOTOFF(%ebx,%ebp,4)
 #APP
-# 78 "emu-align-asm.c" 1
+# 79 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*78*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*79*/
 # 0 "" 2
 #NO_APP
-.L11:
+.L21:
 #APP
-# 103 "emu-align-asm.c" 1
+# 104 "emu-align-asm.c" 1
 	movzbl %ch, %eax
 	shrl $16, %ecx
 	movzbl %ch, %ebp
@@ -922,19 +652,19 @@ exec_vm:
 	addl	$4, %esi
 	movl	%eax, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 103 "emu-align-asm.c" 1
+# 104 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*103*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*104*/
 # 0 "" 2
 #NO_APP
-.L3:
+.L6:
 	movl	%esi, %ebp
 	addl	$4, %esi
 	subl	%edi, %ebp
 #APP
-# 66 "emu-align-asm.c" 1
+# 67 "emu-align-asm.c" 1
 	movzbl %ch, %edx
 	sarl $16, %ecx
 # 0 "" 2
@@ -942,15 +672,13 @@ exec_vm:
 	addl	%ecx, %ebp
 	movl	%ebp, regfile@GOTOFF(%ebx,%edx,4)
 #APP
-# 68 "emu-align-asm.c" 1
+# 69 "emu-align-asm.c" 1
 	movl (%esi), %ecx
 	movzbl %cl, %eax
-	jmp *28(%esp,%eax,4)
-	/*68*/
+	jmp *label.0@GOTOFF(%ebx,%eax,4)
+	/*69*/
 # 0 "" 2
 #NO_APP
-.L72:
-	call	__stack_chk_fail_local
 	.cfi_endproc
 .LFE26:
 	.size	exec_vm, .-exec_vm
@@ -1013,7 +741,7 @@ dump:
 	.cfi_def_cfa_offset 2096
 	movl	2060(%esp), %eax
 	subl	%gs:20, %eax
-	jne	.L76
+	jne	.L74
 	addl	$2076, %esp
 	.cfi_remember_state
 	.cfi_def_cfa_offset 20
@@ -1030,7 +758,7 @@ dump:
 	.cfi_restore 5
 	.cfi_def_cfa_offset 4
 	ret
-.L76:
+.L74:
 	.cfi_restore_state
 	call	__stack_chk_fail_local
 	.cfi_endproc
@@ -1063,7 +791,7 @@ main:
 	movl	%eax, 12(%esp)
 	.p2align 4,,10
 	.p2align 3
-.L78:
+.L76:
 	movl	%edx, %ecx
 	movl	12(%esp), %ebx
 	movl	%edx, %esi
@@ -1080,11 +808,11 @@ main:
 	orl	%ebx, %eax
 	movl	%eax, (%edi,%esi,4)
 	cmpl	$80, %edx
-	jne	.L78
+	jne	.L76
 	call	exec_vm
 	testl	%eax, %eax
-	jne	.L85
-.L79:
+	jne	.L83
+.L77:
 	leal	-12(%ebp), %esp
 	xorl	%eax, %eax
 	popl	%ebx
@@ -1098,13 +826,274 @@ main:
 	.cfi_restore 5
 	.cfi_def_cfa 4, 4
 	ret
-.L85:
+.L83:
 	.cfi_restore_state
 	call	dump
-	jmp	.L79
+	jmp	.L77
 	.cfi_endproc
 .LFE29:
 	.size	main, .-main
+	.section	.data.rel.local,"aw"
+	.align 32
+	.type	label.0, @object
+	.size	label.0, 1024
+label.0:
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L5
+	.long	.L6
+	.long	.L8
+	.long	.L12
+	.long	.L16
+	.long	.L17
+	.long	.L18
+	.long	.L19
+	.long	.L20
+	.long	.L21
+	.long	.L22
+	.long	.L23
+	.long	.L24
+	.long	.L25
+	.long	.L26
+	.long	.L27
+	.long	.L28
+	.long	.L29
+	.long	.L30
+	.long	.L31
+	.long	.L32
+	.long	.L33
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L34
+	.long	.L35
+	.long	.L36
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
+	.long	.L37
 	.local	mem
 	.comm	mem,32772,32
 	.local	regfile
