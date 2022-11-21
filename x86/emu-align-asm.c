@@ -26,18 +26,6 @@ static int storemem(int byte, uint32_t vaddr, uint32_t src)
     mem[div] = (mem[div] & ~(mask << shift)) | ((src & mask) << shift);
     return 0;
 }
-static unsigned int movzblh(int arg)
-{
-    unsigned int rtn;
-  asm("movzbl %h1, %0": "=r"(rtn):"Q"(arg));
-    return rtn;
-}
-static unsigned int movzbll(int arg)
-{
-    unsigned int rtn;
-  asm("movzbl %b1, %0": "=r"(rtn):"q"(arg));
-    return rtn;
-}
 static int exec_vm(void)
 {
     int rtn;
@@ -45,11 +33,11 @@ static int exec_vm(void)
     unsigned int f1, f2, f3;
     register uint32_t inst asm("ecx");
     register uint32_t *lpc asm("esi");
-    register uint32_t *reg asm("edi") = regfile;
+    uint32_t *reg = regfile;
 #include "label.c"
 #define RETURN(ret) { rtn = ret; goto end; }
 #define TWO_OP asm("movzbl %h0, %1\n\t" "sarl $16, %0": "=Q"(s16), "=&r"(f1):"0"(inst))
-#define THREE_OP asm("movzbl %h2, %0\n\t" "shrl $16, %2\n\t" "movzbl %b2, %1\n\t" "movzbl %h2, %2": "=&r"(f1), "=&r"(f2), "=Q"(f3):"2"(inst))
+#define THREE_OP asm("movzbl %h3, %0\n\t" "shrl $16, %3\n\t" "movzbl %h3, %2\n\t" "movzbl %b3, %1": "=&r"(f1), "=r"(f2), "=&r"(f3):"Q"(inst))
 #define S16 (s16)
 #define REL16 ((lpc - mem) * 4 + S16)
 #define FIELD1 (f1)
@@ -58,8 +46,8 @@ static int exec_vm(void)
 #define GUARD_stringify_core(num) #num
 #define GUARD_stringify(num_macro) GUARD_stringify_core(num_macro)
 #define GUARD __asm__("/* " __FILE__ " " GUARD_stringify(__LINE__) " */")
+//#define NEXT_CORE asm goto ("movl (%1), %0\n\t" "movzbl %b0, %%eax\n\t" "/*jmp *_displacement_(%%esp,%%eax,4)*/\n\t" "/*" GUARD_stringify(__LINE__) "*/":"=q" (inst):"r"(lpc):"eax":next); goto next
 #define NEXT_CORE asm goto ("movl (%1), %0\n\t" "movzbl %b0, %%eax\n\t" "jmp *28(%%esp,%%eax,4)\n\t" "/*" GUARD_stringify(__LINE__) "*/":"=q" (inst):"r"(lpc):"eax":next); __builtin_unreachable()
-//#define NEXT_CORE asm ("movl (%1), %0\n\t" "movzbl %b0, %%eax\n\t" "jmp *(%2,%%eax,4)\n\t" "/*" GUARD_stringify(__LINE__) "*/":"=q" (inst):"r"(lpc), "r"(label):"eax"); goto next
 //#define NEXT_CORE inst = *lpc; GUARD; goto next
 #define NEXT lpc++; NEXT_CORE
     if (bad_addr(4, pc))
