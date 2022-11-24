@@ -22,10 +22,11 @@ and seed flag v1
 shrl seed seed v1
 #define beqz 84
 beqz flag +tap_end
-88 /* xor */ seed seed tap
+#define xor 88
+xor seed seed tap
 :tap_end
 86 /* add */ count count v1
-87 /* sub */ seed flag v1
+xor seed flag v1
 85 /* bnez */ flag -lfsr
 
 #define mask 03
