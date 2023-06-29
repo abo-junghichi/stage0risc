@@ -37,9 +37,10 @@ typedef union {
 } cell;
 #define MEM_SIZE (100000)
 static cell mem[MEM_SIZE];
-enum { block_bytes, block_label, block_forward, block_backward,
-    block_end
-};
+typedef enum {
+    block_bytes, block_label, block_field_forth, block_field_back,
+    block_word_forth, block_word_back, block_end
+} block_type;
 typedef struct {
     size_t type, prev, bytes, next;
 } block_header;
@@ -47,13 +48,13 @@ typedef struct {
     size_t prev, pos;
     char *image;
 } parse_state;
-static void succeed_parse(parse_state * ps, size_t next)
+static void succeed_parse(parse_state *ps, size_t next)
 {
     ps->prev = ps->pos;
     ps->pos = next;
     ps->image = mem[ps->pos + 4].image;
 }
-static void flush_block(parse_state * ps, int type)
+static void flush_block(parse_state *ps, block_type type)
 {
     size_t bytes = ps->image - mem[ps->pos + 4].image, next;
     if (block_bytes == type && 0 == bytes)
@@ -65,16 +66,22 @@ static void flush_block(parse_state * ps, int type)
     mem[ps->pos + 3].size = bytes;
     succeed_parse(ps, next);
 }
-static void flush_bytes(parse_state * ps)
+static void flush_bytes(parse_state *ps)
 {
     flush_block(ps, block_bytes);
 }
-static void emit_block(parse_state * ps, int type)
+static void emit_block(parse_state *ps, block_type first_type,
+		       int next_letter, block_type next_type)
 {
     int peek;
+    char *image;
+    block_type type = first_type;
     flush_bytes(ps);
+    image = ps->image;
     while (0 == get_key(&peek))
 	*ps->image++ = peek;
+    if (-1 != next_letter && ps->image > image && next_letter == *image)
+	type = next_type;
     flush_block(ps, type);
 }
 static int parse_src(void)
@@ -108,13 +115,13 @@ static int parse_src(void)
 	  comment_done:
 	    continue;
 	case ':':
-	    emit_block(&ps, block_label);
+	    emit_block(&ps, block_label, -1, block_label);
 	    continue;
 	case '+':
-	    emit_block(&ps, block_forward);
+	    emit_block(&ps, block_field_forth, '+', block_word_forth);
 	    continue;
 	case '-':
-	    emit_block(&ps, block_backward);
+	    emit_block(&ps, block_field_back, '-', block_word_back);
 	    continue;
 	}
 	if (dehex(peek, &upper) && dehex(fgetc(stdin), &lower)
@@ -130,16 +137,19 @@ static int parse_src(void)
     mem[ps.pos + 0].size = block_end;
     return rtn;
 }
-static size_t image_length(cell * block)
+static size_t image_length(cell *block)
 {
     switch (block[0].size) {
     case block_bytes:
 	return block[3].size;
     case block_label:
 	return 0;
-    case block_forward:
-    case block_backward:
+    case block_field_forth:
+    case block_field_back:
 	return 2;
+    case block_word_forth:
+    case block_word_back:
+	return 4;
     }
     assert(0);
 }
@@ -160,19 +170,20 @@ static int charcmp(const char *tgt, const char *std, size_t n)
 	    return 1;
     return 0;
 }
-static int labelsearch(int direction, cell * block, ptrdiff_t *rel)
+static int labelsearch(int direction, cell *block, size_t label_base,
+		       ptrdiff_t *rel)
 {
     size_t len;
     cell *tmp = block;
     int dpos = direction ? 2 : 1;
-    *rel = direction ? 4 : 2;
     while (1) {
 	tmp = &mem[tmp[dpos].size];
 	switch (tmp[0].size) {
 	case block_label:
-	    if (tmp[3].size != block[3].size)
+	    len = block[3].size - label_base;
+	    if (tmp[3].size != len)
 		continue;
-	    if (charcmp(tmp[4].image, block[4].image, block[3].size))
+	    if (charcmp(tmp[4].image, block[4].image + label_base, len))
 		continue;
 	    return 0;
 	case block_end:
@@ -203,21 +214,37 @@ static int compile(void)
 	    continue;
 	case block_label:
 	    continue;
-	case block_forward:
-	    if (labelsearch(1, block, &rel))
+	case block_field_forth:
+	    rel = 4;
+	    if (labelsearch(1, block, 0, &rel))
 		goto error;
-	    goto compile_rel;
-	case block_backward:
-	    if (labelsearch(0, block, &rel))
+	    goto compile_field;
+	case block_field_back:
+	    rel = 2;
+	    if (labelsearch(0, block, 0, &rel))
 		goto error;
-	    goto compile_rel;
+	    goto compile_field;
+	case block_word_forth:
+	    rel = 4;
+	    if (labelsearch(1, block, 1, &rel))
+		goto error;
+	    goto compile_word;
+	case block_word_back:
+	    rel = 0;
+	    if (labelsearch(0, block, 1, &rel))
+		goto error;
+	    goto compile_word;
 	case block_end:
 	    goto end;
 	default:
 	    assert(0);
 	}
-      compile_rel:
+      compile_field:
 	compile_int(2, rel);
+	continue;
+      compile_word:
+	compile_int(4, rel);
+	continue;
     }
   end:
     return 0;
@@ -245,5 +272,5 @@ int main(void)
     rst_read = parse_src();
     dump();
     rst_write = compile();
-    return rst_read || rst_write;
+    return rst_read << 1 | rst_write;
 }

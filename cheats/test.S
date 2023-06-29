@@ -1,5 +1,5 @@
 #define rel(reg,label) 81 reg label
-#define mv(src,dst) 84 src dst src
+#define mv(src,dst) 89 src dst src
 #define label(name) :##name
 :no_one_refer	# define label.
 :		# empty name is allowed.
@@ -10,5 +10,7 @@ label(data)
 81 FA -		# -name refers for backward.
 rel (FA,-)	# can refer labels with empty name.
 mv(23,21)
+++data		# (++|--)name emits relative-addressing with 4byte.
+--
 :data		# allowing duplicated labels and refering nearest acts
 		# friendly with macros.
