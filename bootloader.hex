@@ -1,29 +1,26 @@
 # bootloader in the rom.
-50 00 00 00 # program size
-# start:0x00
-# constants
-80 01 01 00 # lit %1 $1
-80 fd 08 00 # lit %fd $8
-80 fe 10 00 # lit %fe $16
-# read 4 byte header
-a1 0a 00 00 # getc %a
-a1 0b 00 00 # getc %b
-a1 0c 00 00 # getc %c
-a1 0d 00 00 # getc %d
-8d 0b 0b fd # shl %b %b $8
-89 0a 0a 0b # or %a %a %b
-8d 0d 0d fd # shl %d %d $8
-89 0c 0c 0d # or %c %c %d
-8d 0c 0c fe # shl %c %c $16
-89 0a 0a 0c # or %a %a %c
-81 0d 1c 00 # rel %d @data # @data = 0x1c
-82 ff 14 00 # jal %ff @branch # @branch = 0x14
-# loop:0x40
-a1 0c 00 00 # getc %c
-93 0c 00 0d # sb %c $0 %d
-86 0d 0d 01 # add %d %d %1
-87 0a 0a 01 # sub %a %a %1
-#branch:0x50
-85 0a f0 ff # bnez %a @loop # @loop = -0x10 = 0xfff0
-# data:0x54
+3c 00 00 00 # program size
+
+# start: 0x00
+80 01 01 00 # lit one $1 - set the constant.
+80 00 01 00 # lit pass $1 - reading the file of header is first pass.
+80 03 04 00 # lit len $4 - length of the header is 4 byte.
+81 04 30 00 # rel addr +data - set where read content is put.
+82 02 14 00 # jal tmp +read
+
+# loop: 0x14
+a1 02 00 00 # getc tmp
+93 02 00 04 # sb tmp 00 addr
+86 04 04 01 # add addr addr one
+87 03 03 01 # sub len len one
+# read: 0x24
+85 03 f0 ff # bnez len -loop
+
+84 00 14 00 # beqz pass +data - if second pass is done, chainload.
+80 00 00 00 # lit pass $0 - seccond pass
+81 04 0c 00 # rel addr +data
+# the content of the header read at first pass is file size.
+92 03 00 04 # ld len 00 addr
+82 02 ec ff # jal tmp -read
+# data: 0x3c
 $
