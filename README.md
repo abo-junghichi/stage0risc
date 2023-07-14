@@ -60,7 +60,7 @@ and, definitions without key-word are used as comments.
 
 ### numlabel
 This pass is a binary editer with address calculation for backward labels.
-To minimize blob size, forword labels is omited,
+To minimize blob size, forword labels are omited,
 labels are referred by numbers, and, numbers for labels and byte-octets
 are represented as quaternary.
 
