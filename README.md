@@ -22,9 +22,13 @@ When you start bootstrapping with monolithic blob,
 you should treat the endless sequence of
 binary (or octal or hexadecimal) numbers
 as the source-code to minimize the blob.
-What is worse, as you step further implementing a new feature to the compiler,
-you should re-implement all features that exist in previous step.
-So the size of blob shows exponential growth as you step further.
+What is worse,
+as you step further implementing a new feature to the compiler,
+you should re-implement all features that exist in previous step
+with the new compiler which new feature is added to.
+This iteration of re-implemention causes
+exponential growth of the blob size,
+makes a room for bugs and malwares to sneak in.
 Not linear growth, because added features ease writing longer codes.
 
 For example, below is the number of bytes of blobs
@@ -47,7 +51,7 @@ divide the blob of the compiler into some programs,
 then, pass the output of a program to another program as its input.
 This makes inspecting more easy.
 Each divided blob is small,
-input and output of each of them is visible,
+intermediate output of each of them is visible,
 and, all of them are compiled from source code written in decent language.
 
 ## Passes of the first stage compiler
