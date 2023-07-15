@@ -23,16 +23,16 @@ between the bytes(8bits) and the 256 general purpose registers.
 # Instruction listing
 ## Set value to a register
 
-	    opcode destination-reg signed-2byte
-	lit 80     Rd              LO HI        Rd = HILO
-	rel 81     Rd              LO HI        Rd = PC + HILO
-	jal 82     Rlink           LO HI        Rlink = PC+4 ; PC = PC + HILO
+	    opcode destination signed-2byte
+	lit 80     Rd          LO HI        Rd = HILO
+	rel 81     Rd          LO HI        Rd = PC + HILO
+	jal 82     Rlink       LO HI        Rlink = PC+4 ; PC = PC + HILO
 
 ## Conditional branch
 
-	     opcode source-reg signed-2byte
-	beqz 84     Rs         LO HI        if(0==Rs) PC = PC + HILO
-	bnez 85     Rs         LO HI        if(0!=Rs) PC = PC + HILO
+	     opcode source signed-2byte
+	beqz 84     Rs     LO HI        if(0==Rs) PC = PC + HILO
+	bnez 85     Rs     LO HI        if(0!=Rs) PC = PC + HILO
 
 ## Three register operands
 
