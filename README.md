@@ -64,14 +64,14 @@ and, definitions without key-word are used as comments.
 
 ### numlabel
 This pass is a binary editer with address calculation for backward labels.
-To minimize blob size, forword labels are omited,
+To minimize blob size, forward labels are omited,
 labels are referred by numbers, and, numbers for labels and byte-octets
 are represented as quaternary.
 
 ### genheader
-Because numlabel-pass can not generate forword jumps
+Because numlabel-pass can not generate forward jumps
 while the processor begins executing code from first address,
-this pass generates a forword jump which executes code at last of the program.
+this pass generates a forward jump which executes code at last of the program.
 And, append a field which inform the bootloader of program size.
 To minimize blob size, this pass genarates only a header blob.
 Since this project uses/emulates punched tape/card system,
