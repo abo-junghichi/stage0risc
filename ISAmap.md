@@ -1,7 +1,7 @@
 # Instruction length
 Although there are no plans to extend the ISA, and,
 rebuilding ISA is preferred for minimizing proccessor implementation,
-Instruction length is encoded
+instruction length is encoded
 in some MSBs at the first byte of each instruction.
 
 	00                  : invalid instruction
@@ -15,10 +15,6 @@ in some MSBs at the first byte of each instruction.
 	fc - fd (1111-110X) : 128 bytes
 	fe      (1111-1110) : 256 bytes
 	ff      (1111-1111) : reserved for 512 bytes or longer
-
-# Encoding for Registers
-There is a direct and consistent relationship
-between the bytes(8bits) and the 256 general purpose registers.
 
 # Instruction listing
 ## Set value to a register

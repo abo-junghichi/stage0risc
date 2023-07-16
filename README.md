@@ -2,7 +2,7 @@
 The instruction set architecture
 which is targeted for compiling
 by [Stage0 Bootstrap for the Free Software][stage0]
-is so complicated (aka CISC, complex instruction set computer)
+is so complicated (say CISC, complex instruction set computer)
 that it complicates building and inspecting
 a (virtual) machine executing the ISA.
 [stage0]: https://savannah.nongnu.org/projects/stage0/
@@ -46,18 +46,18 @@ With incremental compile techniques such as [Minimal Binary Boot][mbb],
 later of the two problems is avoidable.
 [mbb]: https://codeberg.org/StefanK/MinimalBinaryBoot
 
-But this project takes another approach to solve both of problems -
+But this project takes another approach to solve both of the problems -
 divide the blob of the compiler into some programs,
 then, pass the output of a program to another program as its input.
 This makes inspecting more easy.
 Each divided blob is small,
 intermediate output of each of them is visible,
-and, all of them are compiled from source code written in decent language.
+and, all of them are compiled from source code written in a decent language.
 
 ## Passes of the first stage compiler
 ### linemacro
 This pass reads definitions
-which is constructed from a pair of string and key-word,
+each of which is constructed from a pair of a string and a key-word,
 and converts each key-word to corresponding string.
 This pass enables implementing mnemonics,
 and, definitions without key-word are used as comments.
