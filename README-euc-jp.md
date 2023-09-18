@@ -1,14 +1,12 @@
 # stage0risc
-[Stage0 Bootstrap for the Free Software][stage0]
+[Stage0 Bootstrap for the Free Software](https://savannah.nongnu.org/projects/stage0/)
 の対象マシンが、あまりにも複雑な命令セットコンピュータ(CISC)で、
 bootstrapの障害になる。
 そこで、MIPSプロセッサ並に単純な命令セットのRISCマシンでbootstrapを目指す。
-[stage0]: https://savannah.nongnu.org/projects/stage0/
 
 ## マルチパスにコンパイラを分解する
 
-[なぜ関数プログラミングは重要か][whyfunc]
-[whyfunc]: https://www.sampou.org/haskell/article/whyfp.html
+[なぜ関数プログラミングは重要か](https://www.sampou.org/haskell/article/whyfp.html)
 
 > 元の問題を分割する方法は、部分解を貼り合せる方法に直接依存する。
 
@@ -37,13 +35,14 @@ bootstrapを単一のバイナリから始めようとする場合、
 </pre>
 
 この二つの問題のうち後者については、
-[Minimal Binary Boot][mbb]で示された様に、
+[Minimal Binary Boot](https://codeberg.org/StefanK/MinimalBinaryBoot)
+で示された様に、
 前の段階でコンパイル済みのバイナリに追加する形でコンパイルを進める、
 増分コンパイルの手法によって避けることができる。
-[mbb]: https://codeberg.org/StefanK/MinimalBinaryBoot
 
 対してここでは、両方の問題を解決する別の方法として、
-コンパイラを複数のフィルタプログラムに分解するものを使う。
+[パンチカードシステム](https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%B3%E3%83%81%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0)
+に倣ってコンパイラを複数のフィルタプログラムに分解するものを使う。
 ソースコードをあるフィルタに読み込ませ、
 その出力を別のフィルタに入力することで、
 全体としてコンパイラの動作を行わせるものだ。
@@ -84,7 +83,7 @@ numlabelフィルタでは後方ジャンプができないのに、
 $ make emu-fast.out
 </pre>
 emu-fast.out以外にも、構築可能な実装がある。
-Makefileやemu-*.cを参照。
+Makefileやemu-\*.cを参照。
 
 ### hello,world!プログラム
 <pre>
