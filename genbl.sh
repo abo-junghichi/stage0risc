@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 
 VM=./emu-fast.out
 cat linemacro.img head.asm bootloader.asm | $VM 2>log >tmp.nl
