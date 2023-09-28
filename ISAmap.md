@@ -1,10 +1,11 @@
 # Instruction length
 Although there are no plans to extend the ISA, and,
-rebuilding ISA is preferred for minimizing proccessor implementation,
+rebuilding ISA from the ground up is preferred
+for minimizing proccessor implementation,
 instruction length is encoded
 in some MSBs at the first byte of each instruction.
 
-	00                  : invalid instruction
+	00                  : reserved for invalid instruction
 	01 - 3f (00XX-XXXX) :   1 byte
 	40 - 7f (01XX-XXXX) :   2 bytes
 	80 - bf (10XX-XXXX) :   4 bytes - used at current project.
@@ -22,7 +23,14 @@ in some MSBs at the first byte of each instruction.
 	    opcode destination signed-2byte
 	lit 80     Rd          LO HI        Rd = HILO
 	rel 81     Rd          LO HI        Rd = PC + HILO
-	jal 82     Rlink       LO HI        Rlink = PC+4 ; PC = PC + HILO
+
+## Unconditional jump and link
+
+	     opcode link   signed-2byte (identical with "Set value to a register")
+	jal  82     Rlink  LO HI        Rlink = PC+4 ; PC = PC + HILO
+
+         opcode source link  base   (identical with "Three register operands")
+	jalr 83     Rs     Rlink Rb     Rlink = PC+4 ; PC = Rs + Rb
 
 ## Conditional branch
 
@@ -33,7 +41,6 @@ in some MSBs at the first byte of each instruction.
 ## Three register operands
 
 	     opcode source destination acter
-	jalr 83     Rs     Rlink       Rt    Rlink = PC+4 ; PC = Rs + Rt
 	add  86     Rs     Rd          Rt    Rd = Rs + Rt
 	sub  87     Rs     Rd          Rt    Rd = Rs - Rt
 	xor  88     Rs     Rd          Rt    Rd = Rs ^ Rt
@@ -62,6 +69,6 @@ in some MSBs at the first byte of each instruction.
 ## IO
 
 	       opcode register padding
-	system        (none)   00 00 00 halt the system.
+	system a0     (none)   00 00 00 halt the system.
 	getc   a1     Rd       00 00    read 1byte from input. ~0 for EOF.
 	putc   a2     Rs       00 00    write 1byte to output.
