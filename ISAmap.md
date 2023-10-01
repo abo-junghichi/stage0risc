@@ -29,7 +29,7 @@ in some MSBs at the first byte of each instruction.
 	     opcode link   signed-2byte (identical with "Set value to a register")
 	jal  82     Rlink  LO HI        Rlink = PC+4 ; PC = PC + HILO
 
-         opcode source link  base   (identical with "Three register operands")
+	     opcode source link  base   (identical with "Three register operands")
 	jalr 83     Rs     Rlink Rb     Rlink = PC+4 ; PC = Rs + Rb
 
 ## Conditional branch
