@@ -3,16 +3,16 @@
 {0011b}eof
 {0012b}len
 
-:{@}-loop
+:loop
 add size size one
-:{1@}-count
+:count
 getc tmp b b
 xor tmp tmp eof
 bnez tmp -loop
 lit tmp 0010b b
 add size len tmp
 lit eof 0020b b
-:{2@}-loop
+:loop
 putc len b b
 sub tmp tmp one
 shrl len len eof
@@ -24,7 +24,7 @@ putc size b b
 shrl size tmp eof
 putc tmp b b
 system b b b
-:{3@}-main
+:main
 lit size b b
 lit one 1b b
 lit eof 3333b 3333b

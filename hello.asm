@@ -1,22 +1,22 @@
 {3b}one
 {10b}char
 
-:{@}-string
+:string
 { "Hello,World!\n" padded with '\0' }
 1020b 1211b 1230b 1230b
 1233b 0230b 1113b 1233b
 1302b 1230b 1210b 0201b
 0022b     b     b     b
 
-:{1@}-do_print
+:do_print
 putc char b b
 add dp dp one
-:{2@}-print
+:print
 lb char b dp
 bnez char -do_print
 system b b b
 
-:{3@}-main
+:main
 lit zero b b
 lit one 1b b
 rel dp -string

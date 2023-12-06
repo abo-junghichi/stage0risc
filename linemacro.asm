@@ -15,7 +15,7 @@
 {101b}error_delim
 {102b}entry_interp_word
 
-:{@}-error
+:error
 system 1b b b
 
 {
@@ -26,7 +26,7 @@ read [] to middle brackets.
 (dp)[cont]...[cont]key[cont]key(mp)[new cont'delim'(wp)]word(sp)]
 }
 
-:{1@}-table
+:table
 0200b b { ' ' }
 0022b b { '\n' }
 1323b b { [ }
@@ -34,13 +34,13 @@ read [] to middle brackets.
 3333b 3333b { EOF }
 b b { end of table }
 
-:{2@}-next_peek
+:next_peek
 sb peek b sp
 add sp sp one
-:{3@}-read_word
+:read_word
 getc peek b b
 rel tp -table
-:{10@}-check_delim
+:check_delim
 lw tmp b tp
 beqz tmp -next_peek
 add tp tp two
@@ -51,24 +51,24 @@ beqz tmp -error
 sb cket b sp
 ret link
 
-:{11@}-search_key
+:search_key
 sub tp tp one
 lb tmp b tp
 xor tmp tmp brac
 bnez tmp -search_key
 ret link
 
-:{12@}-search_end
+:search_end
 add wp rst one
 ret link2
-:{13@}-search_next
+:search_next
 jal link -search_key
-:{20@}-check_end
+:check_end
 xor dp tmp tp
 beqz tmp -search_end
-:{21@}-cmpstr
+:cmpstr
 mv rst sp
-:{22@}-loop
+:loop
 sub tp tp one
 sub rst rst one
 lb tmp b tp
@@ -80,17 +80,17 @@ bnez tmp -loop
 jal link -search_key
 add tp rst one
 ret link2
-:{23@}-search_macro
+:search_macro
 sb cket b wp
 add wp sp one
 jal link -read_word
 mv tp mp
 jal tmp -check_end
 
-:{30@}-defmacro_comment
+:defmacro_comment
 mv wp mp
 jalr zero tmp entry_interp_word
-:{31@}-defmacro_name
+:defmacro_name
 mv error_delim cket
 sb cket b wp
 add wp wp one
@@ -101,11 +101,11 @@ beqz tmp -defmacro_comment
 mv mp sp
 mv wp sp
 jalr zero tmp entry_interp_word
-:{32@}-loop
+:loop
 sb tmp b wp
 add rst rst one
 add wp wp one
-:{33@}-expand
+:expand
 lb tmp b rst
 xor tmp tmp2 cket
 bnez tmp2 -loop
@@ -114,35 +114,35 @@ beqz tmp -defmacro_name
 xor peek tmp eof
 beqz tmp -error
 sb peek b wp
-:{100@}-search
+:search
 add wp wp one
 jal link2 -search_macro
 jal tmp -expand
-:{101@}-defmacro
+:defmacro
 mv error_delim brac
 sb brac b wp
 jal tmp -search
 
-:{102@}-done
+:done
 system b b b
-:{103@}-output
+:output
 putc tmp b b
 add rst rst one
-:{110@}-loop
+:loop
 lb tmp b rst
 xor tmp tmp2 cket
 bnez tmp2 -output
-:{111@}-interp_word
+:interp_word
 xor peek tmp brac
 beqz tmp -defmacro
 xor peek tmp eof
 beqz tmp -done
 putc peek b b
-:{112@}-interp_word_main
+:interp_word_main
 jal link2 -search_macro
 jal tmp -loop
 
-:{113@}-main
+:main
 lit zero b b
 mv mp dp
 mv wp dp

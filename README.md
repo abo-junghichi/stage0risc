@@ -55,6 +55,10 @@ intermediate output of each of them is visible,
 and, all of them are compiled from source code written in a decent language.
 
 ## Passes of the first stage compiler
+### autolabel
+This pass allocates a number to each label
+in order to let numlabel-pass deal with these labels.
+
 ### linemacro
 This pass reads definitions
 each of which is constructed from a pair of a string and a key-word,

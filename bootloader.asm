@@ -13,12 +13,12 @@ lit len 10b b                {length of the header is 4byte.}
 {3} rel addr 0300b b {+data} {set where read content is put.}
 {4} jal tmp 0110b b {+read}
 
-:{@}-loop
+:loop
 getc tmp b b
 sb tmp b addr
 add addr addr one
 sub len len one
-{9} :{1@}-read
+{9} :read
 bnez len -loop
 
 {10} beqz pass 0110b b {+data} {if second pass is done, chainload.}
