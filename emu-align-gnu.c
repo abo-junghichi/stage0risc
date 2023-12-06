@@ -8,7 +8,7 @@ static int bad_addr(int byte, uint32_t vaddr)
 {
     return (vaddr % byte) || ((vaddr / 4) >= MEM_SIZE);
 }
-static int loadmem(int byte, uint32_t vaddr, uint32_t * dist)
+static int loadmem(int byte, uint32_t vaddr, uint32_t *dist)
 {
     uint32_t div = vaddr / 4, rem = vaddr % 4;
     if (bad_addr(byte, vaddr))
@@ -176,7 +176,7 @@ static int exec_vm(void)
 	int rst = fgetc(stdin);
 	if (EOF == rst)
 	    rst = -1;
-	reg[FIELD(1)] = rst;
+	reg[FIELD(1)] = (int32_t) rst;
     }
     NEXT;
   CASE(putc):
