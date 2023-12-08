@@ -115,7 +115,7 @@ $ make minblob
 $ make clean
 </pre>
 
-restore binarys deleted by the aforementioned command.
+Restore binarys deleted by the aforementioned command.
 
 <pre>
 $ make minboot
