@@ -108,3 +108,15 @@ $ cat bootloader.img bootloader.img bootloader.img hello.test > bbbh.test
 $ ./emu-fast.out < bbbh.test
 Hello,World!
 </pre>
+
+### minimize binarys
+<pre>
+$ make minblob
+$ make clean
+</pre>
+
+restore binarys deleted by the aforementioned command.
+
+<pre>
+$ make minboot
+</pre>

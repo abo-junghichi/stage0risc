@@ -106,3 +106,15 @@ $ cat bootloader.img bootloader.img bootloader.img hello.test > bbbh.test
 $ ./emu-fast.out < bbbh.test
 Hello,World!
 </pre>
+
+### バイナリを減らす
+<pre>
+$ make minblob
+$ make clean
+</pre>
+
+減らしたバイナリを復元する。
+
+<pre>
+$ make minboot
+</pre>

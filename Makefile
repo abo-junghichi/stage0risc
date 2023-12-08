@@ -31,3 +31,9 @@ hello.test: emu-fast.out
 	./assemble.sh < hello.asm > hello.test
 hello: hello.test emu-fast.out
 	./emu-fast.out < hello.test
+
+minblob: emu-fast.out
+	./minblob.sh
+
+minboot: emu-fast.out
+	./minboot.sh
