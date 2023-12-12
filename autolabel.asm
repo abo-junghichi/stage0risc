@@ -1,19 +1,17 @@
-{3b}peek
-{10b}count
-{11b}link
-{12b}tc
-{13b}sp
+{11b}peek
+{100b}count
+{101b}link
+{110b}tc
+{111b}sp
 
-{20b}one
-{21b}two
-{22b}eof
-{23b}colon
-{30b}brac
-{31b}atmark
-{32b}cket
-{33b}charminus
-{100b}mask
-{101b}charzero
+{1000b}one
+{1001b}eof
+{1010b}colon
+{1011b}brac
+{1100b}atmark
+{1101b}cket
+{1110b}charminus
+{1111b}charzero
 
 :pop_num_core
 sub sp sp one
@@ -25,11 +23,11 @@ bnez tmp -pop_num_core
 ret link
 
 :push_num_core
-and tc tmp mask
+and tc tmp one
 add tmp tmp charzero
 sb tmp b sp
 add sp sp one
-shrl tc tc two
+shrl tc tc one
 :push_num
 bnez tc -push_num_core
 jal tmp -pop_num
@@ -69,15 +67,13 @@ jal tmp -core
 :main
 lit zero b b
 lit one 1b b
-lit two 2b b
-lit eof 3333b 3333b
-lit colon 0322b b
-lit brac 1323b b
-lit atmark 1000b b
-lit cket 1331b b
-lit charminus 0231b b
-lit mask 3b b
-lit charzero 0300b b
+lit eof filled filled
+lit colon 00111010b b
+lit brac 01111011b b
+lit atmark 01000000b b
+lit cket 01111101b b
+lit charminus 00101101b b
+lit charzero 00110000b b
 lit count b b
 jal tmp -core
 

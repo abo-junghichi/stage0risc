@@ -70,7 +70,7 @@ and, definitions without key-word are used as comments.
 This pass is a binary editer with address calculation for backward labels.
 To minimize blob size, forward labels are omited,
 labels are referred by numbers, and, numbers for labels and byte-octets
-are represented as quaternary.
+are represented with two characters '0' and '1' as binary.
 
 ### genheader
 Because numlabel-pass can not generate forward jumps

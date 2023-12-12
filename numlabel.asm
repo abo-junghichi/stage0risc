@@ -1,13 +1,14 @@
-{3b}link
+{11b}link
 {ret link}ret
 
-{10b}sp
-{11b}imm
-{12b}pos
-{13b}peek
-{20b}tp
-{21b}four
-{22b}two
+{100b}sp
+{101b}imm
+{110b}pos
+{111b}peek
+{1000b}tp
+{1001b}four
+{1010b}two
+{1011b}one
 
 :error
 system 1b b b
@@ -17,15 +18,14 @@ bnez imm -error
 system b b b
 
 :shiftin
-shl imm imm two
-lit tmp 300b b { '0' }
+shl imm imm one
+lit tmp 00110000b b { '0' }
 sub peek tmp tmp
 or imm imm tmp
 ret
 
 :write_byte
-lit tmp 1b b
-add pos pos tmp
+add pos pos one
 :write_byte_core
 putc imm b b
 lit imm b b
@@ -44,7 +44,7 @@ sub imm imm pos
 add imm imm two
 add pos pos two
 putc imm b b
-lit tmp 20b b
+lit tmp 1000b b
 shra imm imm tmp
 jal tmp -write_byte_core
 
@@ -52,16 +52,14 @@ jal tmp -write_byte_core
 ret
 
 :table
-0200b b -whitespace { ' ' }
-0022b b -whitespace { '\n' }
-0300b b -shiftin { '0' }
-0301b b -shiftin
-0302b b -shiftin
-0303b b -shiftin
-1202b b -write_byte { 'b' }
-0322b b -def_label { ':' }
-1000b b -ref_label { '@' }
-3333b 3333b -end_of_file { EOF }
+00100000b b -whitespace { ' ' }
+00001010b b -whitespace { '\n' }
+00110000b b -shiftin { '0' }
+00110001b b -shiftin
+01100010b b -write_byte { 'b' }
+00111010b b -def_label { ':' }
+01000000b b -ref_label { '@' }
+filled filled -end_of_file { EOF }
 b b -error { end of table }{ means '\0' is forced to use this }
 
 :loop
@@ -71,7 +69,7 @@ lw tmp b tp
 beqz tmp -error
 xor tmp tmp peek
 bnez tmp -loop
-lw tmp 2b tp
+lw tmp 10b tp
 jalr tmp link tp
 :read
 getc peek b b
@@ -79,8 +77,9 @@ rel tp -table
 jal tmp -search
 :main
 lit zero b b
-lit four 10b b
-lit two 2b b
+lit four 100b b
+lit two 10b b
+lit one 1b b
 mv sp dp
 lit pos b b
 lit imm b b

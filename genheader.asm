@@ -1,7 +1,7 @@
-{0003b}size
-{0010b}one
-{0011b}eof
-{0012b}len
+{11b}size
+{100b}one
+{101b}eof
+{110b}len
 
 :loop
 add size size one
@@ -9,9 +9,9 @@ add size size one
 getc tmp b b
 xor tmp tmp eof
 bnez tmp -loop
-lit tmp 0010b b
+lit tmp 100b b
 add size len tmp
-lit eof 0020b b
+lit eof 1000b b
 :loop
 putc len b b
 sub tmp tmp one
@@ -27,7 +27,7 @@ system b b b
 :main
 lit size b b
 lit one 1b b
-lit eof 3333b 3333b
+lit eof filled filled
 jal tmp -count
 
 {:set_dp}

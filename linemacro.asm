@@ -1,19 +1,19 @@
-{3b}tmp2
-{10b}sp
-{11b}wp
-{12b}mp
-{13b}tp
-{20b}peek
-{21b}rst
-{22b}link
-{23b}link2
-{30b}brac
-{31b}cket
-{32b}two
-{33b}one
-{100b}eof
-{101b}error_delim
-{102b}entry_interp_word
+{11b}tmp2
+{100b}sp
+{101b}wp
+{110b}mp
+{111b}tp
+{1000b}peek
+{1001b}rst
+{1010b}link
+{1011b}link2
+{1100b}brac
+{1101b}cket
+{1110b}two
+{1111b}one
+{10000b}eof
+{10001b}error_delim
+{10010b}entry_interp_word
 
 :error
 system 1b b b
@@ -27,11 +27,11 @@ read [] to middle brackets.
 }
 
 :table
-0200b b { ' ' }
-0022b b { '\n' }
-1323b b { [ }
-1331b b { ] }
-3333b 3333b { EOF }
+00100000b b { ' ' }
+00001010b b { '\n' }
+01111011b b { [ }
+01111101b b { ] }
+filled filled { EOF }
 b b { end of table }
 
 :next_peek
@@ -146,11 +146,11 @@ jal tmp -loop
 lit zero b b
 mv mp dp
 mv wp dp
-lit brac 1323b b
-lit cket 1331b b
-lit two 2b b
+lit brac 01111011b b
+lit cket 01111101b b
+lit two 10b b
 lit one 1b b
-lit eof 3333b 3333b
+lit eof filled filled
 rel entry_interp_word -interp_word
 mv error_delim cket
 jal tmp -interp_word_main

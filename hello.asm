@@ -1,12 +1,12 @@
-{3b}one
-{10b}char
+{11b}one
+{100b}char
 
 :string
 { "Hello,World!\n" padded with '\0' }
-1020b 1211b 1230b 1230b
-1233b 0230b 1113b 1233b
-1302b 1230b 1210b 0201b
-0022b     b     b     b
+01001000b 01100101b 01101100b 01101100b
+01101111b 00101100b 01010111b 01101111b
+01110010b 01101100b 01100100b 00100001b
+00001010b         b         b         b
 
 :do_print
 putc char b b
