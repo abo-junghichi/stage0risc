@@ -23,7 +23,7 @@ since middle brackets are used as comment begin/end,
 read [] to middle brackets.
 }
 {
-(dp)[cont]...[cont]key[cont]key(mp)[new cont'delim'(wp)]word(sp)]
+(dp)[cont]key...[cont]key[cont]key(mp)[new cont'delim'(wp)]word(sp)]
 }
 
 :table
