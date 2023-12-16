@@ -2,9 +2,9 @@
 
 VM=./emu-fast.out
 
-cat autolabel.img - | $VM 2>log >tmp.lm
+cat autolabel.img head.asm - | $VM 2>log >tmp.lm
 if [ -s log ] ; then exit 1 ; fi
-cat linemacro.img head.asm tmp.lm | $VM 2>log >tmp.nl
+cat linemacro.img tmp.lm | $VM 2>log >tmp.nl
 if [ -s log ] ; then exit 1 ; fi
 cat numlabel.img tmp.nl | $VM 2>log
 if [ -s log ] ; then exit 1 ; fi
