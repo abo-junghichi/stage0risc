@@ -1,0 +1,37 @@
+# 0111tttn jcc rel8
+
+0 OF=1
+1 OF=0
+2 CF=1
+3 CF=0
+4 ZF=1
+5 ZF=0
+6 CF=1 or ZF=1
+7 CF=0 and ZF=0
+8 SF=1
+9 SF=0
+a PF=1
+b PF=0
+c SF<>OF
+d SF=OF
+e ZF=1 or SF<>OF
+f ZF=0 and SF=OF
+
+OF=1
+CF=1
+ZF=1
+CF=1 | ZF=1
+SF=1
+PF=1
+SF<>OF
+ZF=1 | SF<>OF
+
+cmp tgt std
+CF=1		unsigned little
+ZF=1		equal
+SF<>OF		signed little
+... | ZF=1	... or equal
+
+OF=1
+SF=1	MSB=1
+PF=1	LSB=0
