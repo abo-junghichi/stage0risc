@@ -60,7 +60,7 @@
 {load Rdist Rbase b disp8}
 {
  Upper bytes of Rdist is not changed!
- Use z/sxb/w for sign extention.
+ Use (z/s)x(b/w) for sign extention.
 }
 {10001010b 01}lb
 {01100110b 10001011b 01}lw
