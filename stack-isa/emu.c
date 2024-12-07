@@ -6,7 +6,7 @@ typedef union {
     uint32_t w;
     uint8_t b[WORD_SIZE];
 } word;
-static word mem[MEM_SIZE];
+static word mem[MEM_SIZE + 1];
 enum { rtn_succ = 0, rtn_addr, rtn_stack, rtn_misc };
 static int rtn;
 static uint32_t pc_next, gp, sp;
@@ -332,6 +332,7 @@ static void init(void)
     size_t i;
     size_t bin;
     /* gp = pc_next = rtn = 0; */
+    /* op_sentinel *//* mem[MEM_SIZE] = 0; */
     sp = MEM_SIZE;
     bin = 0;
     for (i = 0; i < 4; i++) {
@@ -371,8 +372,6 @@ int main(void)
   next:
     sp_back = sp;
     pc_back = pc_next;
-    if (bad_addr(1, pc_next))
-	goto end;
     inst = mem[0].b[pc_next++];
     if (exec_vm(inst))
 	goto end;
