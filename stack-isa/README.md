@@ -4,11 +4,10 @@
 
 This virtual machine has one monolithic memory region
 which is referred with linear addressing.
-And it manages one stack for instruction operands.
+And the machine manages one stack for instruction operands.
 Instructions for calling sub-routines
 also use the stack to place return-addresses.
-As the stack grows and shrinks,
-the memory region also shrinks and grows to supply strages for the stack.
+strages for the stack are supplied from the memory region.
 
 ## instruction set architecture
 
