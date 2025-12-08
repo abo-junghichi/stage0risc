@@ -47,15 +47,6 @@ ret
 1 >
 -loop jmp
 
-:search_end { dp mp wp error_delim link sp peek tp }
-drop 101 < drop
-{ peek mp wp error_delim link }
-10 > 1 $ add 11 <
-{ peek rst _ error_delim link }
-1 < drop
-{ peek rst link }
-ret
-
 :search_fail { dp mp wp error_delim link sp peek tp }
 drop 100 >
 :search_end { dp mp wp error_delim link sp peek tp }
