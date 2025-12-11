@@ -62,6 +62,15 @@ $ ./test.sh
 $ ./clean.sh
 </pre>
 
+# tracking stack-height for named variables
+There is a set of codes which implements and uses named variables
+by tracking stack-height of run-time at compile-time.
+
+<pre>
+$ ./bootstrap.sh
+$ ./test.sh
+</pre>
+
 ## see also - [The Zylin ZPU](https://github.com/zylin/zpu)
 
 It introduces a cpu-flag to handle immediate oprands denser.
